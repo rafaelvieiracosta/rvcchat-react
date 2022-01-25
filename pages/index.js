@@ -1,4 +1,6 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import React from 'react';
+import { useRouter } from 'next/router'
 import appConfig from '../config.json';
 
 function Titulo(props){
@@ -16,42 +18,13 @@ function Titulo(props){
     );
 }
 
-function GlobalStyle() {
-    return (
-      <style global jsx>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          list-style: none;
-        }
-        body {
-          font-family: 'Open Sans', sans-serif;
-        }
-        /* App fit Height */ 
-        html, body, #__next {
-          min-height: 100vh;
-          display: flex;
-          flex: 1;
-        }
-        #__next {
-          flex: 1;
-        }
-        #__next > * {
-          flex: 1;
-        }
-        /* ./App fit Height */ 
-      `}</style>
-    );
-  }
-
-
   export default function PaginaInicial() {
-    const username = 'rafaelvieiracosta';
-  
+    //const username = 'rafaelvieiracosta';
+    const [username, setUsername]= React.useState('');
+    const roteamento = useRouter();
+
     return (
       <>
-        <GlobalStyle />
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -76,6 +49,10 @@ function GlobalStyle() {
             {/* Formulário */}
             <Box
               as="form"
+              onSubmit={function(event){
+                event.preventDefault();
+                roteamento.push('/chat')
+              }}
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                 width: { xs: '100%', sm: '50%' }, textAlign: 'center', 
@@ -89,8 +66,16 @@ function GlobalStyle() {
                 }}
                 src={`https://raw.githubusercontent.com/rafaelvieiracosta/rafaelvieiracosta/c01f62ca97e09397e74d5cd249001ce22df6c613/rvc.svg`}
               />
-  
+
               <TextField
+              value={username}
+              onChange={function (event){
+                console.log('digitou', event.target.value);
+                if (event.target.value.length > 2){
+                const valor = event.target.value;
+                }
+                setUsername(valor);
+              }}
                 fullWidth
                 rounded='md'
                 placeholder='Escreva seu usuário do GitHub'
@@ -103,6 +88,8 @@ function GlobalStyle() {
                   },
                 }}
               />
+
+
               <Button
                 type='submit'
                 label='Entrar'
@@ -131,25 +118,33 @@ function GlobalStyle() {
                 maxWidth: '200px',
                 padding: '16px',
                 backgroundColor: appConfig.theme.colors.neutrals[500],
-                borderRadius: '10px',
+                borderRadius: '20px',
                 flex: 1,
                 minHeight: '240px',
+                minWidth: '200px',
               }}
             >
               <Image
                 styleSheet={{
-                  borderRadius: '50%',
+                  minHeight: '168px',
+                  minWidth: '168px',
+                  borderRadius: '20px',
                   marginBottom: '16px',
+                  border: '1px solid #CED3D9'
                 }}
                 src={`https://github.com/${username}.png`}
               />
               <Text
                 variant="body4"
                 styleSheet={{
-                  color: appConfig.theme.colors.neutrals[500],
+                  color: appConfig.theme.colors.neutrals[400],
                   backgroundColor: appConfig.theme.colors.neutrals[999],
                   padding: '3px 10px',
-                  borderRadius: '1000px'
+                  borderRadius: '7px',
+                  minHeight: '20px',
+                  minWidth: '100%',
+                  maxWidth: '100%',
+                  textAlign: 'center'
                 }}
               >
                 {username}
