@@ -24,7 +24,7 @@ export default function PaginaDoChat(){
             }}
           >
 
-              <Text >Página Chat</Text>
+              <Text >Futuro Chat</Text>
 
         </Box>
         </Box>
