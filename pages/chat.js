@@ -1,6 +1,5 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
-
 export default function PaginaDoChat(){
     return(
         <>
