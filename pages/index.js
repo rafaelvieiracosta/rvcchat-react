@@ -21,6 +21,7 @@ function Titulo(props) {
 export default function PaginaInicial() {
   //const username = 'rafaelvieiracosta';
   const [username, setUsername] = React.useState("");
+  const [local, setLocal] = React.useState("");
   const roteamento = useRouter();
 
   return (
@@ -48,7 +49,7 @@ export default function PaginaInicial() {
             padding: "24px",
             margin: "16px",
             boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
-            backgroundColor: appConfig.theme.colors.neutrals[400],
+            backgroundColor: appConfig.theme.colors.neutrals[100],
           }}
         >
           {/* Formulário */}
@@ -79,9 +80,18 @@ export default function PaginaInicial() {
             <TextField
               value={username}
               onChange={function (event) {
-                console.log("digitou", event.target.value);
+                console.log("digitou", );
                 if (event.target.value.length > 2) {
                   const valor = event.target.value;
+                
+
+                fetch('https://api.github.com/users/' + event.target.value)
+                  .then(function(respostaDoServidor){
+                    return respostaDoServidor.json()
+                  })
+                  .then(function(respostaConvertida){
+                    setLocal(respostaConvertida.location);
+                  })
                 }
                 setUsername(valor);
               }}
@@ -93,7 +103,7 @@ export default function PaginaInicial() {
                   textColor: appConfig.theme.colors.neutrals[999],
                   mainColor: appConfig.theme.colors.neutrals[900],
                   mainColorHighlight: appConfig.theme.colors.primary[500],
-                  backgroundColor: appConfig.theme.colors.neutrals[400],
+                  backgroundColor: appConfig.theme.colors.neutrals[100],
                 },
               }}
             />
@@ -123,7 +133,7 @@ export default function PaginaInicial() {
               alignItems: "center",
               maxWidth: "200px",
               padding: "16px",
-              backgroundColor: appConfig.theme.colors.neutrals[500],
+              backgroundColor: appConfig.theme.colors.neutrals[200],
               borderRadius: "20px",
               flex: 1,
               minHeight: "240px",
@@ -143,7 +153,7 @@ export default function PaginaInicial() {
             <Text
               variant="body4"
               styleSheet={{
-                color: appConfig.theme.colors.neutrals[400],
+                color: appConfig.theme.colors.neutrals[100],
                 backgroundColor: appConfig.theme.colors.neutrals[999],
                 padding: "3px 10px",
                 borderRadius: "7px",
@@ -154,6 +164,25 @@ export default function PaginaInicial() {
               }}
             >
               {username}
+            </Text>
+
+            <Text
+              variant="body4"
+              styleSheet={{
+                color: appConfig.theme.colors.neutrals[999],
+                backgroundColor: appConfig.theme.colors.neutrals[200],
+                border: "1px solid #0B0C12",
+                padding: "3px 10px",
+                borderRadius: "7px",
+                minHeight: "20px",
+                maxHeight: "20px",
+                minWidth: "100%",
+                maxWidth: "100%",
+                textAlign: "center",
+                marginTop: "2px",
+              }}
+            >
+              {local}
             </Text>
           </Box>
           {/* Photo Area */}
