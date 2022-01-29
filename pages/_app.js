@@ -32,6 +32,7 @@ export default function MyApp({ Component, pageProps }) {
     <>
     <GlobalStyle />
     <ScrollBar />
+    <Head/>
     <Component {...pageProps} /> 
     </> 
     );
@@ -53,5 +54,15 @@ export default function MyApp({ Component, pageProps }) {
         border:2px solid #E6EAF0;
       }
       `}</style>
+    );
+  }
+
+  function Head() {
+    return (
+      <head>
+        <link rel="shortcut icon" href="../src/img/fav.svg"
+        type="image/svg+xml"></link>
+        <title>rvcchat</title>
+      </head>
     );
   }
