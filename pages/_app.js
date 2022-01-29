@@ -31,7 +31,27 @@ export default function MyApp({ Component, pageProps }) {
     return( 
     <>
     <GlobalStyle />
+    <ScrollBar />
     <Component {...pageProps} /> 
     </> 
+    );
+  }
+
+  function ScrollBar() {
+    return (
+      <style global jsx>{`
+      *::-webkit-scrollbar-track {
+        background-color: #E6EAF0;
+        border-radius: 10px;
+      }
+      *::-webkit-scrollbar {
+        width: 6px;
+        background: #F4F4F4;
+      }
+      *::-webkit-scrollbar-thumb {
+        background: #CED3D9;
+        border:2px solid #E6EAF0;
+      }
+      `}</style>
     );
   }

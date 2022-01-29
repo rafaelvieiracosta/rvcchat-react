@@ -23,7 +23,7 @@ export default function PaginaInicial() {
   const [username, setUsername] = React.useState("");
   const [local, setLocal] = React.useState("");
   const roteamento = useRouter();
-
+  
   return (
     <>
       <Box
@@ -57,7 +57,9 @@ export default function PaginaInicial() {
             as="form"
             onSubmit={function (event) {
               event.preventDefault();
-              roteamento.push("/chat");
+              if (username != '' && username != undefined){
+                  roteamento.push(`/chat?username=${username}`);
+              }
             }}
             styleSheet={{
               display: "flex",
@@ -83,7 +85,6 @@ export default function PaginaInicial() {
                 console.log("digitou", );
                 if (event.target.value.length > 2) {
                   const valor = event.target.value;
-                
 
                 fetch('https://api.github.com/users/' + event.target.value)
                   .then(function(respostaDoServidor){
